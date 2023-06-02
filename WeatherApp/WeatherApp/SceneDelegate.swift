@@ -2,7 +2,7 @@
 //  SceneDelegate.swift
 //  WeatherApp
 //
-//  Created by Dereje on 5/21/23.
+//  Created by Dereje Gudeta on 5/21/23.
 //
 
 import UIKit

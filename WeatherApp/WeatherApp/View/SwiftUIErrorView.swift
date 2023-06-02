@@ -21,8 +21,8 @@ struct SwiftUIErrorView: View {
     
 }
 
-//struct SwiftUIErrorView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SwiftUIErrorView()
-//    }
-//}
+struct SwiftUIErrorView_Previews: PreviewProvider {
+    static var previews: some View {
+        SwiftUIErrorView()
+    }
+}

@@ -2,7 +2,7 @@
 //  WeatherForcastModel.swift
 //  WeatherApp
 //
-//  Created by Consultant on 5/22/23.
+//  Created by Dereje Gudeta on 5/22/23.
 //
 
 import Foundation
