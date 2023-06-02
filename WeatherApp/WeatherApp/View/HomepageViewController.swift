@@ -54,18 +54,19 @@ class HomepageViewController: UIViewController
         //weatherCollectionView.delegate = self
         //weatherCollectionView.dataSource = self
         viewModel = WeatherViewModel()                   //MARK: Initialize the object
-       //setUPView()
+     
         if city.value(forKey: "City") == nil {
             defaultLocation()                           //MARK: Get default location for lat and lon
         }
         else {
-        //getWeatherByCityName
+        
         }
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
-        print("viewWillAppear")
+        //print("viewWillAppear")
+        
         if (6...18).contains(Calendar.current.component(.hour, from: Date())) {
             let image = UIImage(named: "day")
             self.dayCycleImageView.image = image
@@ -78,7 +79,7 @@ class HomepageViewController: UIViewController
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("viewDidAppear")
+        //print("viewDidAppear")
         
         
         if city.value(forKey: "City") == nil {
@@ -93,12 +94,12 @@ class HomepageViewController: UIViewController
         }
         else{
             
-            viewModel?.getWeatherByCityName(cityName: city.string(forKey: "City")!)        //MARK: getWeatherByCity
+            viewModel?.getWeatherByCityName(cityName: city.string(forKey: "City")!)          //MARK: getWeatherByCity
             getLatLong()
-           // viewModel?.getWeeklyWeatherByLocation(lat: self.lat, lon: self.lon)             //MARK: getWeeklyWeatherByLocation
+           // viewModel?.getWeeklyWeatherByLocation(lat: self.lat, lon: self.lon)             //MARK: getMonthlyWeatherByLocation
           
-            updateUI()                                                                      //MARK: update UI
-           //perform(#selector(updateUIUsingLocation), with: nil, afterDelay: 2)
+            updateUI()                                                                        //MARK: update UI
+           
         }
         
     }
@@ -127,7 +128,7 @@ class HomepageViewController: UIViewController
             if searchCity.count == 0 {                         //MARK: Notify to user the search bar is empty
                 print("search bar is empty")
             }
-            //else if viewModel.isError {
+            
             else if !isUSCity(userInput: searchCity) {             //MARK: check the userInput string is not US String
                                                                     //MARK: Navigate to SwiftUI to show the input is not found in db
                 //Create the object
@@ -156,13 +157,19 @@ class HomepageViewController: UIViewController
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
             
             self.labelCityName.text = self.viewModel.weatherList.first?.name ?? "N/A"
+            
+            
             let tempinDC = (self.viewModel.weatherList.first?.main.temp ?? 0) - 273
             let tempinF = tempinDC * 9/5 + 32
-            self.labelTempC.text = String( "\(round(tempinDC * 100) / 100.0) °C" )
+            self.labelTempC.text = String( "\(round(tempinDC * 100) / 100.0) °C  /" )
             self.labelTempF.text = String( "\(round(tempinF * 100) / 100.0) °F" )
+            
+            
             self.labelLatitude.text = String("lat = \(self.viewModel.weatherList.first?.coord.lat ?? 0.0)")
             self.labelLongitude.text = String("lon = \(self.viewModel.weatherList.first?.coord.lon ?? 0.0)")
             let weatherIcon = "https://openweathermap.org/img/wn/\(self.viewModel.weatherList.first?.weather.first?.icon ?? "0")@4x.png"
+            
+            
             self.weatherIcon.load(urlString: weatherIcon)
             self.weatherType.text = String(self.viewModel.weatherList.first?.weather.first?.main ?? "N/A")
             //let windIcon = "https://openweathermap.org/img/wn/\(self.viewModel.weatherList[0].wind.)@4x.png"

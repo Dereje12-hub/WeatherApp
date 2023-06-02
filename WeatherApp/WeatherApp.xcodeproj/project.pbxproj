@@ -125,8 +125,6 @@
 				02AAAD6D2A17C468001164F9 /* View */,
 				02AAAD412A17BA63001164F9 /* Main.storyboard */,
 				02AAAD442A17BA65001164F9 /* Assets.xcassets */,
-				02AAAD6B2A17C258001164F9 /* Animation */,
-				02AAAD6C2A17C29B001164F9 /* Weather */,
 				02AAAD462A17BA65001164F9 /* LaunchScreen.storyboard */,
 				02AAAD492A17BA65001164F9 /* Info.plist */,
 			);
@@ -148,20 +146,6 @@
 				02AAAD5E2A17BA65001164F9 /* WeatherAppUITestsLaunchTests.swift */,
 			);
 			path = WeatherAppUITests;
-			sourceTree = "<group>";
-		};
-		02AAAD6B2A17C258001164F9 /* Animation */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Animation;
-			sourceTree = "<group>";
-		};
-		02AAAD6C2A17C29B001164F9 /* Weather */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Weather;
 			sourceTree = "<group>";
 		};
 		02AAAD6D2A17C468001164F9 /* View */ = {

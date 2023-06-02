@@ -65,11 +65,9 @@ class WeatherViewModel {
                     }
                 } receiveValue: { (model: WeatherModel) in
                     
-                    print(model)
-                    //weatherList in //(model: WeatherModel) in
                     //print(model)
                     self.weatherList = [model]
-                    //print(weatherList)
+                    
                 }.store(in: &self.cancellable)
         }
         
@@ -81,9 +79,6 @@ class WeatherViewModel {
        
         Task{
             print("getWeatherByLocation  lat= \(lat)  lon= \(lon) ")
-    
-             //http://api.openweathermap.org/data/2.5/forecast?lat=37.33233141&lon=-122.0312186&appid=8ae49103ffc6fe8e995b68bbe8626c77
-             // guard let url = URL(string:"https://api.openweathermap.org/data/2.5/weather?lat=37.33233141&lon=-122.0312186&appid=8ae49103ffc6fe8e995b68bbe8626c77") else { return }
             
             guard let url = URL(string:"https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=8ae49103ffc6fe8e995b68bbe8626c77")
             else { return }
@@ -104,11 +99,9 @@ class WeatherViewModel {
                     }
                 } receiveValue: { (model: WeatherModel) in
                     
-                    print(model)
-                    //weatherList in //(model: WeatherModel) in
                     //print(model)
                     self.weatherList = [model]
-                    //print(weatherList)
+                   
                 }.store(in: &self.cancellable)
         }
         
@@ -136,11 +129,9 @@ class WeatherViewModel {
                     }
                 } receiveValue: { (modelForcast: WeatherForcastModel) in
 
-                    print(modelForcast)
-                    //weatherList in //(model: WeatherModel) in
-                
+                    //print(modelForcast)
                     self.weeklyWeatherList = [modelForcast]
-                    //print(weatherList)
+                   
                 }.store(in: &self.cancellable)
         }
 
