@@ -5,7 +5,6 @@
 //  Created by Dereje Gudeta on 5/21/23.
 //
 
-
 import UIKit
 import SwiftUI
 
@@ -41,7 +40,7 @@ class HomepageViewController: UIViewController
     
     let city = UserDefaults.standard            //MARK: userdefault to hold city name
 
-    let getLocation = Location()             //MARK: getting user location
+    let getLocation = Location()                //MARK: getting user location
 
     var lat: Double = 0.0
     var lon: Double = 0.0
@@ -51,14 +50,13 @@ class HomepageViewController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //defaultLocation()                               //MARK: Show weather for Default Location
         textfieldWeather.delegate = self
         //weatherCollectionView.delegate = self
         //weatherCollectionView.dataSource = self
         viewModel = WeatherViewModel()                   //MARK: Initialize the object
        //setUPView()
         if city.value(forKey: "City") == nil {
-            defaultLocation()                           //MARK: Get default location lat and lon
+            defaultLocation()                           //MARK: Get default location for lat and lon
         }
         else {
         //getWeatherByCityName
@@ -82,18 +80,22 @@ class HomepageViewController: UIViewController
     override func viewDidAppear(_ animated: Bool) {
         print("viewDidAppear")
         
+        
         if city.value(forKey: "City") == nil {
-            
-            viewModel?.getWeatherByLocation(lat: self.lat, lon: self.lon)                   //MARK: getWeatherByLocation
-            viewModel?.getWeeklyWeatherByLocation(lat: self.lat, lon: self.lon)             //MARK: getWeeklyWeatherByLocation
-            updateUI()                                                                       //MARK: update UI
-            //perform(#selector(updateUIUsingLocation), with: nil, afterDelay: 2)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
+                print("lat => \(self!.lat)")
+                 // Default Atlanta location lon: , lat: 33.749
+                self?.viewModel?.getWeatherByLocation(lat: self?.lat ?? 33.749, lon: self?.lon ?? -84.388)             //MARK: getWeatherByLocation
+                //viewModel?.getWeeklyWeatherByLocation(lat: self.lat, lon: self.lon)             //MARK: getWeeklyWeatherByLocation
+                self!.updateUI()                                                                   //MARK: update UI
+                //perform(#selector(updateUIUsingLocation), with: nil, afterDelay: 2)
+            }
         }
         else{
             
             viewModel?.getWeatherByCityName(cityName: city.string(forKey: "City")!)        //MARK: getWeatherByCity
             getLatLong()
-            viewModel?.getWeeklyWeatherByLocation(lat: self.lat, lon: self.lon)             //MARK: getWeeklyWeatherByLocation
+           // viewModel?.getWeeklyWeatherByLocation(lat: self.lat, lon: self.lon)             //MARK: getWeeklyWeatherByLocation
           
             updateUI()                                                                      //MARK: update UI
            //perform(#selector(updateUIUsingLocation), with: nil, afterDelay: 2)
@@ -150,9 +152,10 @@ class HomepageViewController: UIViewController
     
     
     func updateUI(){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) {
+            
             self.labelCityName.text = self.viewModel.weatherList.first?.name ?? "N/A"
-            //self.labelDate.text = String(self.viewModel.weatherList[0].timezone)
             let tempinDC = (self.viewModel.weatherList.first?.main.temp ?? 0) - 273
             let tempinF = tempinDC * 9/5 + 32
             self.labelTempC.text = String( "\(round(tempinDC * 100) / 100.0) °C" )
@@ -180,8 +183,8 @@ class HomepageViewController: UIViewController
     func getLatLong(){
        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.lat = self.viewModel.weatherList.first?.coord.lat ?? 0.0              //MARK: Set the lat for the city previously safed
-            self.lon = self.viewModel.weatherList.first?.coord.lon ?? 0.0              //MARK: Set the lon for the city previously safed
+            self.lat = self.viewModel.weatherList.first?.coord.lat ?? 0.0        //MARK: Set the lat for the city previously safed
+            self.lon = self.viewModel.weatherList.first?.coord.lon ?? 0.0        //MARK: Set the lon for the city previously safed
             
         }
     }

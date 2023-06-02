@@ -10,14 +10,6 @@ import UIKit
 import Combine
 
 
-//protocol ViewToPresentHome
-//{
-////    //var homeInteractor : PresenterToInteractorHomepageProtocol? {get set}
-////    //var homeView : PresenterToViewHomepageProtocol? {get set}
-////
-//    func getWeatherByCityName(cityName : String)
-////    //func sevenDayWeather(cityName : String)
-//}
 protocol RefreshUIProtocol {
     func refreshMyUIScreen()
 }
@@ -30,13 +22,13 @@ class WeatherViewModel {
             delegate?.refreshMyUIScreen()
         }
     }
-    
+    //*
     var weeklyWeatherList: [WeatherForcastModel] = [] {
         didSet{
             //refreshUI?()
             delegate?.refreshMyUIScreen()
         }
-    }
+    }  //*/
     
     var isError: Bool = false
     
@@ -48,12 +40,6 @@ class WeatherViewModel {
     //Cancellabel object to cancel the whole operatin
     //
     private var cancellable = Set<AnyCancellable>()
-    
-//    init(networkFetcher: NetworkFetcher, cancellable: Set<AnyCancellable> = Set<AnyCancellable>()) {
-//        self.networkFetcher = networkFetcher
-//        self.cancellable = cancellable
-//        print("WEATHER MODEL")
-//    }
     
     
     func getWeatherByCityName(cityName: String) {
@@ -96,9 +82,9 @@ class WeatherViewModel {
         Task{
             print("getWeatherByLocation  lat= \(lat)  lon= \(lon) ")
     
-            //let networkFetcher: NetworkFetcher = NetworkManager()
-        //http://api.openweathermap.org/data/2.5/forecast?lat=37.33233141&lon=-122.0312186&appid=8ae49103ffc6fe8e995b68bbe8626c77
-           // guard let url = URL(string:"https://api.openweathermap.org/data/2.5/weather?lat=37.33233141&lon=-122.0312186&appid=8ae49103ffc6fe8e995b68bbe8626c77") else { return }
+             //http://api.openweathermap.org/data/2.5/forecast?lat=37.33233141&lon=-122.0312186&appid=8ae49103ffc6fe8e995b68bbe8626c77
+             // guard let url = URL(string:"https://api.openweathermap.org/data/2.5/weather?lat=37.33233141&lon=-122.0312186&appid=8ae49103ffc6fe8e995b68bbe8626c77") else { return }
+            
             guard let url = URL(string:"https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=8ae49103ffc6fe8e995b68bbe8626c77")
             else { return }
             
@@ -128,12 +114,10 @@ class WeatherViewModel {
         
     }
     
+    
     func getWeeklyWeatherByLocation(lat: Double, lon: Double) {
 
         Task{
-        
-            //let networkFetcher: NetworkFetcher = NetworkManager()
-            
             //guard let url = URL(string:"http://api.openweathermap.org/data/2.5/forecast?lat=37.33233141&lon=-122.0312186&appid=8ae49103ffc6fe8e995b68bbe8626c77") else { return }
             guard let url = URL(string:"https://api.openweathermap.org/data/2.5/forecast?lat=\(lat)&lon=\(lon)&appid=8ae49103ffc6fe8e995b68bbe8626c77") else { return }
             let request = URLRequest(url: url)
@@ -161,6 +145,7 @@ class WeatherViewModel {
         }
 
     }
+    
     
     
 }

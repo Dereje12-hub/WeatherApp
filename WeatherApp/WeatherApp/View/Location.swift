@@ -4,6 +4,7 @@
 //
 //  Created by Dereje Gudeta on 5/21/23.
 //
+
 import CoreLocation
 import UIKit
     
@@ -22,23 +23,23 @@ public class Location: NSObject, CLLocationManagerDelegate {
             
             /*
             isAuthorizedtoGetUserLocation()
-            
-            //if we have no permission to access user location, then ask user for permission.
-            func isAuthorizedtoGetUserLocation() {
-                if CLLocationManager.locationServicesEnabled() {
-                    manager.requestWhenInUseAuthorization()
-                    
-                }
-            }
+             //if we have no permission to access user location, then ask user for permission.
+             func isAuthorizedtoGetUserLocation() {
+                 if CLLocationManager.locationServicesEnabled() {
+                     manager.requestWhenInUseAuthorization()
+                     
+                 }
+             }
+         
             */
             /*
             DispatchQueue.global().async {
                   if CLLocationManager.locationServicesEnabled() {
                       self.locationServicesEnabled =  CLLocationManager.locationServicesEnabled()
                   }
+              
             }
             */
-            
             
             locationServicesEnabled = CLLocationManager.locationServicesEnabled()
             if locationServicesEnabled {
@@ -48,7 +49,8 @@ public class Location: NSObject, CLLocationManagerDelegate {
                 locationCallback(nil)
             }
         }
-        
+    
+ 
         public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
             locationCallback(locations.last!)
             manager.stopUpdatingLocation()
@@ -65,4 +67,10 @@ public class Location: NSObject, CLLocationManagerDelegate {
             
         }
     
+    
+    
+    
+    
 }
+
+

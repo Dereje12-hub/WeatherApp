@@ -14,11 +14,8 @@ struct SwiftUIErrorView: View {
     var body: some View {
       
             VStack{
-                Text("Input is not found in the db!")
-                Text("Input is not found in the db!")
-                Text("Input is not found in the db!")
-                Text("Input is not found in the db!")
-                Text("Input is not found in the db!")
+                Text("Sorry Input is not found in the db!")
+               
             }.padding()
         }
     
